@@ -60,6 +60,7 @@ public class ProductConverterImplTest
 
         //Then
         Assert.assertNotNull( product );
+        Assert.assertThat( product.getId(), is( new Long(0 )) );
         Assert.assertThat( product.getLabel(), is( productDTO.getLabel()));
         Assert.assertThat( product.getBarCode(), is( productDTO.getBarCode().getBarCodeObject() ) );
         Assert.assertThat( product.getPrice(), is(productDTO.getPrice()) );
@@ -80,7 +81,7 @@ public class ProductConverterImplTest
     }
 
     @Test( expected = ProductConverterException.class )
-    public void  convertDTOToDomainFromNull()
+    public void convertDTOToDomainFromNull()
     {
         //Get
         ProductDTO productDTO = null;
@@ -91,5 +92,23 @@ public class ProductConverterImplTest
 
         //Then
         Assert.assertNull( productDTO );
+    }
+
+    @Test( expected = ProductConverterException.class )
+    public void convertDTOToDomainWhenBarCodeObjectIsWrongType()
+    {
+        //Get
+        String dtoLabel = "ProductLabel";
+        int dtoInvalidBarCode = 123;
+        BarCode dtoBarCode = new BarCode( dtoInvalidBarCode );
+        BigDecimal dtoPrice = new BigDecimal( 10 );
+        ProductDTO productDTO = new ProductDTO( dtoLabel, dtoBarCode, dtoPrice );
+
+
+        //When
+        Product product = productConverter.convert( productDTO );
+
+        //Then
+        Assert.assertNull( product );
     }
 }

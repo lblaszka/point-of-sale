@@ -16,6 +16,7 @@ public interface ProductConverter
      * Convert ProductDTO instance to Product instance.
      *
      * @throws      ProductConverterException if param is null
+     * @throws      ProductConverterException if BarCode object is not same type as barCode in domain.
      * @param       productDTO to be converter on Product instance
      * @return      Product instance converted from Product instance
      */
