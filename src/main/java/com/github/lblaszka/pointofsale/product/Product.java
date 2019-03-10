@@ -9,7 +9,7 @@ public class Product
 {
     private Long id;
     private String label;
-    private BarCode barCode;
+    private String barCode;
     private BigDecimal price;
 
 
@@ -18,7 +18,7 @@ public class Product
     }
 
 
-    public Product( Long id, String label, BarCode barCode, BigDecimal price )
+    public Product( Long id, String label, String barCode, BigDecimal price )
     {
         this.id = id;
         this.label = label;
@@ -51,13 +51,13 @@ public class Product
     }
 
 
-    public BarCode getBarCode()
+    public String getBarCode()
     {
         return barCode;
     }
 
 
-    public void setBarCode( BarCode barCode )
+    public void setBarCode( String barCode )
     {
         this.barCode = barCode;
     }
@@ -80,14 +80,14 @@ public class Product
     {
         if ( this == o ) return true;
         if ( o == null || getClass() != o.getClass() ) return false;
-        Product that = (Product) o;
-        return Objects.equals( id, that.id );
+        Product product = (Product) o;
+        return Objects.equals( id, product.id );
     }
 
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( id );
+        return Objects.hash( id, label, barCode, price );
     }
 }

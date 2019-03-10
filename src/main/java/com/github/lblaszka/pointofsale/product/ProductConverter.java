@@ -10,7 +10,7 @@ public interface ProductConverter
      * @param       product to be converter on ProductDTO instance
      * @return      ProductDTO instance converted from Product instance
      */
-    ProductDTO convert( Product product );
+    ProductDTO convert( Product product ) throws ProductConverterException;
 
     /**
      * Convert ProductDTO instance to Product instance.
@@ -19,5 +19,5 @@ public interface ProductConverter
      * @param       productDTO to be converter on Product instance
      * @return      Product instance converted from Product instance
      */
-    Product convert( ProductDTO productDTO );
+    Product convert( ProductDTO productDTO ) throws ProductConverterException;
 }
