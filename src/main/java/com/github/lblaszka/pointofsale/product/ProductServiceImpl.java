@@ -35,6 +35,7 @@ public class ProductServiceImpl implements ProductService
         }
         catch ( Exception exc )
         {
+            System.err.println( exc.getMessage() );
             return Optional.empty();
         }
 
