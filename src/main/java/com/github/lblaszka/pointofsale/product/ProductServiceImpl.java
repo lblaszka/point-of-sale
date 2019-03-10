@@ -20,6 +20,24 @@ public class ProductServiceImpl implements ProductService
     @Override
     public Optional<ProductDTO> findByBarCode( BarCodeContainer barCodeContainer )
     {
-        return null;
+        if( barCodeContainer == null )
+            return Optional.empty();
+
+        try
+        {
+            Optional<Product> productOptional = productRepository.findByBarCode( (String)barCodeContainer.getBarCodeObject() );
+            if( productOptional.isPresent() )
+            {
+                ProductDTO productDTO = productConverter.convert( productOptional.get() );
+                return Optional.ofNullable( productDTO );
+            }
+
+        }
+        catch ( Exception exc )
+        {
+            return Optional.empty();
+        }
+
+        return Optional.empty();
     }
 }
