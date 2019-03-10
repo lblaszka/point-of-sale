@@ -1,20 +1,20 @@
 package com.github.lblaszka.pointofsale.product;
 
-import com.github.lblaszka.pointofsale.barcode.BarCode;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
 
 import java.math.BigDecimal;
 
 public class ProductDTO
 {
     private String label;
-    private BarCode barCode;
+    private BarCodeContainer barCodeContainer;
     private BigDecimal price;
 
 
-    public ProductDTO( String label, BarCode barCode, BigDecimal price )
+    public ProductDTO( String label, BarCodeContainer barCodeContainer, BigDecimal price )
     {
         this.label = label;
-        this.barCode = barCode;
+        this.barCodeContainer = barCodeContainer;
         this.price = price;
     }
 
@@ -31,15 +31,15 @@ public class ProductDTO
     }
 
 
-    public BarCode getBarCode()
+    public BarCodeContainer getBarCodeContainer()
     {
-        return barCode;
+        return barCodeContainer;
     }
 
 
-    public void setBarCode( BarCode barCode )
+    public void setBarCodeContainer( BarCodeContainer barCodeContainer )
     {
-        this.barCode = barCode;
+        this.barCodeContainer = barCodeContainer;
     }
 
 

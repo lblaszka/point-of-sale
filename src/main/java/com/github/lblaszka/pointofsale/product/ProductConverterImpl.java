@@ -1,6 +1,6 @@
 package com.github.lblaszka.pointofsale.product;
 
-import com.github.lblaszka.pointofsale.barcode.BarCode;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
 
 public class ProductConverterImpl implements ProductConverter
 {
@@ -11,7 +11,7 @@ public class ProductConverterImpl implements ProductConverter
             throw new ProductConverterException( "ProductConverter: product is null!" );
         return new ProductDTO(
                 product.getLabel(),
-                new BarCode( product.getBarCode() ),
+                new BarCodeContainer( product.getBarCode() ),
                 product.getPrice()
         );
     }
@@ -22,15 +22,22 @@ public class ProductConverterImpl implements ProductConverter
     {
         if( productDTO == null )
             throw new ProductConverterException( "ProductConverter: productDTO is null!" );
+        //if( !( productDTO.getBarCodeContainer().getBarCodeObject() instanceof String ) )
+        //    throw new ProductConverterException( "ProductConverter: BarCodeContainer has object not same type as barCode in Product class." );
 
-        if( !( productDTO.getBarCode().getBarCodeObject() instanceof String ) )
-            throw new ProductConverterException( "ProductConverter: BarCode object is not String class!" );
+        try
+        {
+            return new Product(
+                    new Long( 0L ),
+                    productDTO.getLabel(),
+                    (String) productDTO.getBarCodeContainer().getBarCodeObject(),
+                    productDTO.getPrice()
+            );
+        }
+        catch ( ClassCastException exc )
+        {
+            throw new ProductConverterException( "ProductConverter: BarCodeContainer has object not same type as barCode in Product class." );
+        }
 
-        return new Product(
-                new Long( 0L ),
-                productDTO.getLabel(),
-                (String) productDTO.getBarCode().getBarCodeObject(),
-                productDTO.getPrice()
-        );
     }
 }

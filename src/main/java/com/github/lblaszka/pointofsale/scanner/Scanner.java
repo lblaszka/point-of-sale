@@ -1,6 +1,6 @@
 package com.github.lblaszka.pointofsale.scanner;
 
-import com.github.lblaszka.pointofsale.barcode.BarCode;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
 
 import java.util.Optional;
 
@@ -12,5 +12,5 @@ public interface Scanner
      *
      * @return  Optional object with scanned barCode or null presence.
      */
-    Optional<BarCode> getBarCode();
+    Optional<BarCodeContainer> getBarCode();
 }

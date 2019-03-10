@@ -3,12 +3,12 @@ package com.github.lblaszka.pointofsale.barcode;
 
 import java.util.Objects;
 
-public class BarCode
+public class BarCodeContainer
 {
     private Object barCodeObject;
 
 
-    public BarCode( Object barCodeObject )
+    public BarCodeContainer( Object barCodeObject )
     {
         this.barCodeObject = barCodeObject;
     }

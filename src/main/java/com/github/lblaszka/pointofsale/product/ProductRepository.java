@@ -1,7 +1,5 @@
 package com.github.lblaszka.pointofsale.product;
 
-import com.github.lblaszka.pointofsale.barcode.BarCode;
-
 import java.util.Optional;
 
 public interface ProductRepository
