@@ -26,6 +26,7 @@ public class DisplayLCDElementImplTotalPriceTest
         String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender, returnedRender );
     }
@@ -42,6 +43,7 @@ public class DisplayLCDElementImplTotalPriceTest
         String returnedRender = displayLCDElemenImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender, returnedRender );
     }
@@ -59,6 +61,7 @@ public class DisplayLCDElementImplTotalPriceTest
         String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender, returnedRender );
     }
