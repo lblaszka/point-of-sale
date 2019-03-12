@@ -30,6 +30,7 @@ public class DisplayLCDElemenImplProductTest
         String returnedRender = displayLCDElemenImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender, returnedRender );
     }
@@ -46,6 +47,7 @@ public class DisplayLCDElemenImplProductTest
         String returnedRender = displayLCDElemenImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender , returnedRender );
     }
@@ -63,6 +65,7 @@ public class DisplayLCDElemenImplProductTest
         String returnedRender = displayLCDElemenImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender, returnedRender );
     }
@@ -81,13 +84,52 @@ public class DisplayLCDElemenImplProductTest
         String returnedRender = displayLCDElemenImplProduct.getRender();
 
         //THEN
+        System.out.println(expectedRender);
+        Assert.assertNotNull(returnedRender);
+        Assert.assertEquals( expectedRender, returnedRender );
+    }
+
+    @Test
+    public void roundPriceValue()
+    {
+        //GET
+        String productLabel = "Product Label";
+        BigDecimal productPrice = new BigDecimal( 12.214324235d );
+        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, productPrice );
+
+        String expectedRender = getCorrectRender( productLabel, productPrice );
+
+        //WHEN
+        String returnedRender = displayLCDElemenImplProduct.getRender();
+
+        //THEN
+        System.out.println(expectedRender);
+        Assert.assertNotNull(returnedRender);
+        Assert.assertEquals( expectedRender, returnedRender );
+    }
+
+    @Test
+    public void createWithLabelWithoutChars()
+    {
+        //GET
+        String productLabel = "";
+        BigDecimal productPrice = new BigDecimal( 12 );
+        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, productPrice );
+
+        String expectedRender = getCorrectRender( productLabel, productPrice );
+
+        //WHEN
+        String returnedRender = displayLCDElemenImplProduct.getRender();
+
+        //THEN
+        System.out.println(expectedRender);
         Assert.assertNotNull(returnedRender);
         Assert.assertEquals( expectedRender, returnedRender );
     }
 
     String getCorrectRender( String label, BigDecimal price )
     {
-        if( label != null )
+        if( label != null && label.length() != 0 )
         {
             if( label.length() > 20 )
             {
@@ -107,11 +149,5 @@ public class DisplayLCDElemenImplProductTest
         {
             return String.format( "%-20s : ", label )+"N/A";
         }
-
-
-
-
     }
-
-
 }

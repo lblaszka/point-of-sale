@@ -20,7 +20,7 @@ public class DisplayLCDElemenImplProduct implements DisplayLCDElement
     @Override
     public String getRender()
     {
-        if( label != null )
+        if( label != null && label.length() != 0 )
         {
             if( label.length() > 20 )
             {
