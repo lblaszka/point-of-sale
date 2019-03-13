@@ -1,6 +1,7 @@
 package com.github.lblaszka.pointofsale.printer;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class PrinterElementImplTotalPrice implements PrinterElement
 {
@@ -16,6 +17,13 @@ public class PrinterElementImplTotalPrice implements PrinterElement
     @Override
     public String getPrintable()
     {
-        return null;
+        if( totalPrice != null )
+        {
+            return String.format( "%20s  ", "     TOTAL PRICE" )+totalPrice.setScale( 2, RoundingMode.HALF_UP )+" PLN";
+        }
+        else
+        {
+            return String.format( "%20s  ", "     TOTAL PRICE" )+"N/A";
+        }
     }
 }
