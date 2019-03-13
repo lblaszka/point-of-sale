@@ -1,20 +1,15 @@
 package com.github.lblaszka.pointofsale.displaylcd;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 
-import static org.junit.Assert.*;
-
 @RunWith( MockitoJUnitRunner.class )
-public class DisplayLCDElemenImplProductTest
+public class DisplayLCDElementImplProductTest
 {
     @Test
     public void correctCreate()
@@ -22,12 +17,12 @@ public class DisplayLCDElemenImplProductTest
         //GET
         String productLabel = "Product Label";
         BigDecimal productPrice = new BigDecimal( 12 );
-        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, productPrice );
+        DisplayLCDElementImplProduct displayLCDElementImplProduct = new DisplayLCDElementImplProduct( productLabel, productPrice );
 
         String expectedRender = getCorrectRender( productLabel, productPrice );
 
         //WHEN
-        String returnedRender = displayLCDElemenImplProduct.getRender();
+        String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
         System.out.println(expectedRender);
@@ -41,10 +36,10 @@ public class DisplayLCDElemenImplProductTest
         //GET
         BigDecimal productPrice = new BigDecimal( 12 );
         String expectedRender = getCorrectRender( null, productPrice );
-        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( null, productPrice );
+        DisplayLCDElementImplProduct displayLCDElementImplProduct = new DisplayLCDElementImplProduct( null, productPrice );
 
         //WHEN
-        String returnedRender = displayLCDElemenImplProduct.getRender();
+        String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
         System.out.println(expectedRender);
@@ -57,12 +52,12 @@ public class DisplayLCDElemenImplProductTest
     {
         //GET
         String productLabel = "Product Label";
-        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, null );
+        DisplayLCDElementImplProduct displayLCDElementImplProduct = new DisplayLCDElementImplProduct( productLabel, null );
 
         String expectedRender =  getCorrectRender( productLabel, null );
 
         //WHEN
-        String returnedRender = displayLCDElemenImplProduct.getRender();
+        String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
         System.out.println(expectedRender);
@@ -76,12 +71,12 @@ public class DisplayLCDElemenImplProductTest
         //GET
         String productLabel = "This is too long label to full showing";
         BigDecimal productPrice = new BigDecimal( 23.23f );
-        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, productPrice );
+        DisplayLCDElementImplProduct displayLCDElementImplProduct = new DisplayLCDElementImplProduct( productLabel, productPrice );
 
         String expectedRender = getCorrectRender( productLabel, productPrice );
 
         //WHEN
-        String returnedRender = displayLCDElemenImplProduct.getRender();
+        String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
         System.out.println(expectedRender);
@@ -95,12 +90,12 @@ public class DisplayLCDElemenImplProductTest
         //GET
         String productLabel = "Product Label";
         BigDecimal productPrice = new BigDecimal( 12.214324235d );
-        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, productPrice );
+        DisplayLCDElementImplProduct displayLCDElementImplProduct = new DisplayLCDElementImplProduct( productLabel, productPrice );
 
         String expectedRender = getCorrectRender( productLabel, productPrice );
 
         //WHEN
-        String returnedRender = displayLCDElemenImplProduct.getRender();
+        String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
         System.out.println(expectedRender);
@@ -114,12 +109,12 @@ public class DisplayLCDElemenImplProductTest
         //GET
         String productLabel = "";
         BigDecimal productPrice = new BigDecimal( 12 );
-        DisplayLCDElemenImplProduct displayLCDElemenImplProduct = new DisplayLCDElemenImplProduct( productLabel, productPrice );
+        DisplayLCDElementImplProduct displayLCDElementImplProduct = new DisplayLCDElementImplProduct( productLabel, productPrice );
 
         String expectedRender = getCorrectRender( productLabel, productPrice );
 
         //WHEN
-        String returnedRender = displayLCDElemenImplProduct.getRender();
+        String returnedRender = displayLCDElementImplProduct.getRender();
 
         //THEN
         System.out.println(expectedRender);

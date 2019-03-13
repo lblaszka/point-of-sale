@@ -1,0 +1,20 @@
+[33mcdd995b[m[33m ([m[1;36mHEAD -> [m[1;32mprinterDev[m[33m)[m Add impl to PrinterElementImplTotalPrice
+[33m60d5622[m Create test for PrinterElementImplTotalPrice
+[33m1ef9c57[m Add impl to PrinterElementImplProduct
+[33mb6403a2[m Create test for PrinterElementImplProduct
+[33m41c4396[m Add interface Printer and PrinterElement
+[33m2d5aaff[m[33m ([m[1;32mmaster[m[33m)[m Merge with displayDev
+[33m7dd3a73[m Change format render of DisplayLCDElementImplTotalPrice
+[33mdc1ca2b[m Add impl to DislayLCDElementImplTotalPrice
+[33mc566934[m DisplayLCDElementImplProduct predicting 0 leng. label + DisplayLCDElementImplTotalPrice tests
+[33m3fad188[m Add impl. of DisplayLCDElementImplProduct
+[33m8d4e8f7[m Add tests
+[33m88e0662[m Add printing error
+[33mdf9ca52[m Add impl. of ProductSerice.
+[33m04a126a[m Add ProductService tests
+[33m7d4f7fb[m Refactory ProductConvertImpl, now throwing when fail casting BarCode
+[33m9d6091a[m ProductConverter, add throw when BarCode is wrong class + test
+[33m9aa9b72[m Add ProductConvert implementation
+[33m40f53c8[m Preparation for testing ProductConverter
+[33m04f1908[m Add Product domain, repo, dto and interface converter.
+[33m5ad0252[m init

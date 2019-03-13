@@ -3,14 +3,14 @@ package com.github.lblaszka.pointofsale.displaylcd;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class DisplayLCDElemenImplProduct implements DisplayLCDElement
+public class DisplayLCDElementImplProduct implements DisplayLCDElement
 {
 
     private String label;
     private BigDecimal price;
 
 
-    public DisplayLCDElemenImplProduct( String label, BigDecimal price )
+    public DisplayLCDElementImplProduct( String label, BigDecimal price )
     {
         this.label = label;
         this.price = price;
