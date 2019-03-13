@@ -70,11 +70,11 @@ public class DisplayLCDElementImplTotalPriceTest
     {
         if( price != null )
         {
-            return String.format( "%-20s : ", "     TOTAL PRICE:" )+price.setScale( 2, RoundingMode.HALF_UP )+" PLN";
+            return String.format( "%20s  ", "     TOTAL PRICE" )+price.setScale( 2, RoundingMode.HALF_UP )+" PLN";
         }
         else
         {
-            return String.format( "%-20s : ", "     TOTAL PRICE:" )+"N/A";
+            return String.format( "%20s  ", "     TOTAL PRICE" )+"N/A";
         }
     }
 }
