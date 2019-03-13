@@ -64,10 +64,10 @@ public class DeviceImpl implements Device
                     );
                 }
                 else
-                    putOnDisplayProductNotFound();
+                    putOnDisplayInvalidBarCode();
             }
             else
-                putOnDisplayInvalidBarCode();
+                putOnDisplayProductNotFound();
         }
 
         BigDecimal totalPrice = getTotalPrice( productList );

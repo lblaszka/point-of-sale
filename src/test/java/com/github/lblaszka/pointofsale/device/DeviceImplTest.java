@@ -106,4 +106,40 @@ public class DeviceImplTest
         device.scanProducts();
     }
 
+    @Test
+    public void codeBarWithoutProductInDB()
+    {
+        //GET
+        //SCANNER:
+        List<BarCodeContainer> barCodeContainers = new ArrayList<>( 2 );
+        barCodeContainers.add( new BarCodeContainer( "CODE-0" ) );
+        barCodeContainers.add( new BarCodeContainer( "CODE-1" ) );
+        Mockito.when( scanner.getBarCode() ).thenReturn(
+                Optional.ofNullable( barCodeContainers.get( 0 ) )
+                ,Optional.ofNullable( barCodeContainers.get( 1 ) )
+                ,Optional.ofNullable( new BarCodeContainer( "EXIT" ) )
+        );
+
+        //DATA BASE:
+        List<Product> productList = new ArrayList<>( 2 );
+        productList.add( new Product( 1L, "Product 1", "CODE-0", new BigDecimal( 10.50f ) ) );
+        productList.add( null );
+        Mockito.when( productRepository.findByBarCode( "CODE-0" ) ).thenReturn( Optional.ofNullable( productList.get( 0 ) ) );
+        Mockito.when( productRepository.findByBarCode( "CODE-1" ) ).thenReturn( Optional.ofNullable( productList.get( 1 ) ) );
+
+        device.scanProducts();
+    }
+
+    @Test
+    public void noProduct()
+    {
+        //GET
+        //SCANNER:
+        Mockito.when( scanner.getBarCode() ).thenReturn(Optional.ofNullable(
+                new BarCodeContainer( "EXIT" ) )
+        );
+
+        device.scanProducts();
+    }
+
 }
