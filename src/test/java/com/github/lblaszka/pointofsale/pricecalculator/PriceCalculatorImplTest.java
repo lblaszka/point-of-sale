@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class PriceCalculatorImplTest
         BigDecimal expectedTotalPrice = new BigDecimal( 0 );
         for( BigDecimal price : priceList )
         {
-            expectedTotalPrice.add( price );
+            expectedTotalPrice = expectedTotalPrice.add( price );
         }
 
         //WHEN
@@ -69,6 +70,7 @@ public class PriceCalculatorImplTest
     public void getTotalPriceWithEmptyListPrice()
     {
         //GET
+        priceList = new ArrayList<>(  );
         BigDecimal expectedTotalPrice = new BigDecimal( 0 );
 
         //WHEN
@@ -90,7 +92,7 @@ public class PriceCalculatorImplTest
             if( price == null )
                 continue;
 
-            expectedTotalPrice.add( price );
+            expectedTotalPrice = expectedTotalPrice.add( price );
         }
 
         //WHEN

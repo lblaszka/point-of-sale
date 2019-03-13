@@ -1,0 +1,109 @@
+package com.github.lblaszka.pointofsale.device;
+
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.displaylcd.DisplayLCD;
+import com.github.lblaszka.pointofsale.displaylcd.DisplayLCDElement;
+import com.github.lblaszka.pointofsale.pricecalculator.PriceCalculator;
+import com.github.lblaszka.pointofsale.pricecalculator.PriceCalculatorImpl;
+import com.github.lblaszka.pointofsale.printer.Printer;
+import com.github.lblaszka.pointofsale.printer.PrinterElement;
+import com.github.lblaszka.pointofsale.product.*;
+import com.github.lblaszka.pointofsale.scanner.Scanner;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.Assert.*;
+
+@RunWith( MockitoJUnitRunner.class )
+public class DeviceImplTest
+{
+
+    @Mock
+    private ProductRepository productRepository;
+    @Mock
+    private Scanner scanner;
+
+    private Printer printer = printerElementList ->
+    {
+        System.out.println();
+        for( PrinterElement printerElement : printerElementList )
+        {
+            System.out.println("PRINTER: " +printerElement.getPrintable());
+        }
+    };
+
+    private DisplayLCD displayLCD = displayLCDElement -> System.out.println("LCD: " + displayLCDElement.getRender());
+
+    private Device device;
+    private PriceCalculator priceCalculator;
+    private ProductService productService;
+    private ProductConverter productConverter;
+
+    @Before
+    public void setUp()
+    {
+        priceCalculator = new PriceCalculatorImpl();
+        productConverter = new ProductConverterImpl();
+        productService = new ProductServiceImpl( productRepository, productConverter );
+        device = new DeviceImpl( scanner, displayLCD, printer,productService, priceCalculator );
+    }
+
+    @Test
+    public void findAllProducts()
+    {
+        //GET
+        //SCANNER:
+        List<BarCodeContainer> barCodeContainers = new ArrayList<>( 2 );
+        barCodeContainers.add( new BarCodeContainer( "CODE-0" ) );
+        barCodeContainers.add( new BarCodeContainer( "CODE-1" ) );
+        Mockito.when( scanner.getBarCode() ).thenReturn(
+                Optional.ofNullable( barCodeContainers.get( 0 ) )
+                ,Optional.ofNullable( barCodeContainers.get( 1 ) )
+                ,Optional.ofNullable( new BarCodeContainer( "EXIT" ) )
+        );
+
+        //DATA BASE:
+        List<Product> productList = new ArrayList<>( 2 );
+        productList.add( new Product( 1L, "Product 1", "CODE-0", new BigDecimal( 10.50f ) ) );
+        productList.add( new Product( 2L, "Project 2", "CODE-1", new BigDecimal( 12.50f ) ) );
+        Mockito.when( productRepository.findByBarCode( "CODE-0" ) ).thenReturn( Optional.ofNullable( productList.get( 0 ) ) );
+        Mockito.when( productRepository.findByBarCode( "CODE-1" ) ).thenReturn( Optional.ofNullable( productList.get( 1 ) ) );
+
+        device.scanProducts();
+    }
+
+    @Test
+    public void scannerReturnEmptyOptional()
+    {
+        //GET
+        //SCANNER:
+        List<BarCodeContainer> barCodeContainers = new ArrayList<>( 2 );
+        barCodeContainers.add( new BarCodeContainer( "CODE-0" ) );
+        barCodeContainers.add( null );
+        Mockito.when( scanner.getBarCode() ).thenReturn(
+                Optional.ofNullable( barCodeContainers.get( 0 ) )
+                ,Optional.ofNullable( barCodeContainers.get( 1 ) )
+                ,Optional.ofNullable( new BarCodeContainer( "EXIT" ) )
+        );
+
+        //DATA BASE:
+        List<Product> productList = new ArrayList<>( 2 );
+        productList.add( new Product( 1L, "Product 1", "CODE-0", new BigDecimal( 10.50f ) ) );
+        productList.add( new Product( 2L, "Project 2", "CODE-1", new BigDecimal( 12.50f ) ) );
+        Mockito.when( productRepository.findByBarCode( "CODE-0" ) ).thenReturn( Optional.ofNullable( productList.get( 0 ) ) );
+        Mockito.when( productRepository.findByBarCode( "CODE-1" ) ).thenReturn( Optional.ofNullable( productList.get( 1 ) ) );
+
+        device.scanProducts();
+    }
+
+}

@@ -31,14 +31,13 @@ public class DeviceImpl implements Device
     private List<ProductDTO> productList = new LinkedList<>(  );
 
 
-    public DeviceImpl( Scanner scanner, DisplayLCD displayLCD, Printer printer, ProductService productService, PriceCalculator priceCalculator, List<ProductDTO> productList )
+    public DeviceImpl( Scanner scanner, DisplayLCD displayLCD, Printer printer, ProductService productService, PriceCalculator priceCalculator )
     {
         this.scanner = scanner;
         this.displayLCD = displayLCD;
         this.printer = printer;
         this.productService = productService;
         this.priceCalculator = priceCalculator;
-        this.productList = productList;
     }
 
 
@@ -51,7 +50,7 @@ public class DeviceImpl implements Device
 
             if( barCodeContainerOptional.isPresent() )
             {
-                if( barCodeContainerOptional.get().equals( "EXIT" ) )
+                if( isExitSignal( barCodeContainerOptional.get() ) )
                     break;
 
                 Optional<ProductDTO> productOptional = productService.findByBarCode( barCodeContainerOptional.get() );
@@ -113,6 +112,20 @@ public class DeviceImpl implements Device
         printerElements.add( new PrinterElementImplTotalPrice( _totalPrice ) );
 
         printer.printElements( printerElements );
+    }
+
+    private boolean isExitSignal( BarCodeContainer barCodeContainer )
+    {
+        try
+        {
+            String barCode = (String) barCodeContainer.getBarCodeObject();
+            return barCode.equals( "EXIT" );
+        }
+        catch ( Exception ex )
+        {
+            return false;
+        }
+
     }
 
 
