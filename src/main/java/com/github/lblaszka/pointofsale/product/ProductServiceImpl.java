@@ -1,6 +1,7 @@
 package com.github.lblaszka.pointofsale.product;
 
 import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class ProductServiceImpl implements ProductService
 
         try
         {
-            Optional<Product> productOptional = productRepository.findByBarCode( (String)barCodeContainer.getBarCodeObject() );
+            Optional<Product> productOptional = productRepository.findByBarCode( (String) barCodeContainer.getBarCodeObject() );
             if( productOptional.isPresent() )
             {
                 ProductDTO productDTO = productConverter.convert( productOptional.get() );

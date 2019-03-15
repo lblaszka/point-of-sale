@@ -1,10 +1,9 @@
 package com.github.lblaszka.pointofsale.device;
 
-import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 import com.github.lblaszka.pointofsale.displaylcd.DisplayLCD;
 import com.github.lblaszka.pointofsale.pricecalculator.PriceCalculator;
 import com.github.lblaszka.pointofsale.printer.Printer;
-import com.github.lblaszka.pointofsale.printer.PrinterElement;
 import com.github.lblaszka.pointofsale.product.ProductDTO;
 import com.github.lblaszka.pointofsale.product.ProductService;
 import com.github.lblaszka.pointofsale.scanner.Scanner;
@@ -16,11 +15,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +48,7 @@ public class DeviceImplTest
     {
         Mockito.when( scanner.getBarCode() )
                 .thenReturn(
-                        Optional.ofNullable( new BarCodeContainer( new String( "EXIT") ) )
+                        Optional.ofNullable( new BarCodeContainerImpl( new String( "EXIT") ) )
                 );
 
         device.scanProducts();
@@ -71,7 +67,7 @@ public class DeviceImplTest
         Mockito.when( scanner.getBarCode() )
                 .thenReturn(
                         Optional.empty(),
-                        Optional.of( new BarCodeContainer( new String("EXIT") ) )
+                        Optional.of( new BarCodeContainerImpl( new String("EXIT") ) )
                 );
 
         device.scanProducts();
@@ -88,8 +84,8 @@ public class DeviceImplTest
     {
         Mockito.when( scanner.getBarCode() )
                 .thenReturn(
-                        Optional.of( new BarCodeContainer( null )),
-                        Optional.of( new BarCodeContainer( new String("EXIT") ) )
+                        Optional.of( new BarCodeContainerImpl( null )),
+                        Optional.of( new BarCodeContainerImpl( new String("EXIT") ) )
                 );
         Mockito.when( productService.findByBarCode( Matchers.anyObject() )).thenReturn( Optional.empty() );
 
@@ -111,23 +107,23 @@ public class DeviceImplTest
         Mockito.when( scanner.getBarCode() )
                 .thenReturn(
                         Optional.empty(),
-                        Optional.of( new BarCodeContainer( new String("1") )),
+                        Optional.of( new BarCodeContainerImpl( new String("1") )),
                         Optional.empty(),
-                        Optional.of( new BarCodeContainer( new String("2") )),
+                        Optional.of( new BarCodeContainerImpl( new String("2") )),
                         Optional.empty(),
-                        Optional.of( new BarCodeContainer( new String("3") )),
+                        Optional.of( new BarCodeContainerImpl( new String("3") )),
                         Optional.empty(),
-                        Optional.of( new BarCodeContainer( new String("4") )),
+                        Optional.of( new BarCodeContainerImpl( new String("4") )),
                         Optional.empty(),
-                        Optional.of( new BarCodeContainer( new String("EXIT") ) )
+                        Optional.of( new BarCodeContainerImpl( new String("EXIT") ) )
                 );
 
         Mockito.when( productService.findByBarCode( Matchers.anyObject() ) )
                 .thenReturn(
                     Optional.empty(),
-                    Optional.of( new ProductDTO( "1", new BarCodeContainer( null ), null ) ),
+                    Optional.of( new ProductDTO( "1", new BarCodeContainerImpl( null ), null ) ),
                     Optional.empty(),
-                    Optional.of( new ProductDTO( "2", new BarCodeContainer( null ), null ) )
+                    Optional.of( new ProductDTO( "2", new BarCodeContainerImpl( null ), null ) )
                 );
 
 

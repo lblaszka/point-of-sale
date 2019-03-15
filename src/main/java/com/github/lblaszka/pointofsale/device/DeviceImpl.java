@@ -1,6 +1,7 @@
 package com.github.lblaszka.pointofsale.device;
 
 import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 import com.github.lblaszka.pointofsale.displaylcd.DisplayLCD;
 import com.github.lblaszka.pointofsale.displaylcd.DisplayLCDElementImplProduct;
 import com.github.lblaszka.pointofsale.displaylcd.DisplayLCDElementImplTotalPrice;
@@ -9,7 +10,6 @@ import com.github.lblaszka.pointofsale.printer.Printer;
 import com.github.lblaszka.pointofsale.printer.PrinterElement;
 import com.github.lblaszka.pointofsale.printer.PrinterElementImplProduct;
 import com.github.lblaszka.pointofsale.printer.PrinterElementImplTotalPrice;
-import com.github.lblaszka.pointofsale.product.Product;
 import com.github.lblaszka.pointofsale.product.ProductDTO;
 import com.github.lblaszka.pointofsale.product.ProductService;
 import com.github.lblaszka.pointofsale.scanner.Scanner;

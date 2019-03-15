@@ -1,6 +1,6 @@
 package com.github.lblaszka.pointofsale.product;
 
-import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 
 public class ProductConverterImpl implements ProductConverter
 {
@@ -11,7 +11,7 @@ public class ProductConverterImpl implements ProductConverter
             throw new ProductConverterException( "ProductConverter: product is null!" );
         return new ProductDTO(
                 product.getLabel(),
-                new BarCodeContainer( product.getBarCode() ),
+                new BarCodeContainerImpl( product.getBarCode() ),
                 product.getPrice()
         );
     }
@@ -22,21 +22,21 @@ public class ProductConverterImpl implements ProductConverter
     {
         if( productDTO == null )
             throw new ProductConverterException( "ProductConverter: productDTO is null!" );
-        //if( !( productDTO.getBarCodeContainer().getBarCodeObject() instanceof String ) )
-        //    throw new ProductConverterException( "ProductConverter: BarCodeContainer has object not same type as barCode in Product class." );
+        //if( !( productDTO.getBarCodeContainerImpl().getBarCodeObject() instanceof String ) )
+        //    throw new ProductConverterException( "ProductConverter: BarCodeContainerImpl has object not same type as barCode in Product class." );
 
         try
         {
             return new Product(
                     new Long( 0L ),
                     productDTO.getLabel(),
-                    (String) productDTO.getBarCodeContainer().getBarCodeObject(),
+                    (String) productDTO.getBarCodeContainerImpl().getBarCodeObject(),
                     productDTO.getPrice()
             );
         }
         catch ( ClassCastException exc )
         {
-            throw new ProductConverterException( "ProductConverter: BarCodeContainer has object not same type as barCode in Product class." );
+            throw new ProductConverterException( "ProductConverter: BarCodeContainerImpl has object not same type as barCode in Product class." );
         }
 
     }

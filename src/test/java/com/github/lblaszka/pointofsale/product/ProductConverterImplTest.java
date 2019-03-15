@@ -1,13 +1,12 @@
 package com.github.lblaszka.pointofsale.product;
 
-import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
 import static org.hamcrest.core.Is.is;
@@ -29,7 +28,7 @@ public class ProductConverterImplTest
         //Get
         Long productId = new Long( 1 );
         String productLabel = "ProductLabel";
-        String productBarCode = "BarCodeContainer";
+        String productBarCode = "BarCodeContainerImpl";
         BigDecimal productPrice = new BigDecimal( 10 );
         Product product = new Product( productId, productLabel, productBarCode, productPrice );
 
@@ -40,7 +39,7 @@ public class ProductConverterImplTest
         //Then
         Assert.assertNotNull( productDTO );
         Assert.assertThat( productDTO.getLabel(), is( product.getLabel()));
-        Assert.assertThat( productDTO.getBarCodeContainer().getBarCodeObject(), is( product.getBarCode()) );
+        Assert.assertThat( productDTO.getBarCodeContainerImpl().getBarCodeObject(), is( product.getBarCode()) );
         Assert.assertThat( productDTO.getPrice(), is(product.getPrice()) );
     }
 
@@ -49,10 +48,10 @@ public class ProductConverterImplTest
     {
         //Get
         String dtoLabel = "ProductLabel";
-        String dtoBarCodeString = "BarCodeContainer";
-        BarCodeContainer dtoBarCodeContainer = new BarCodeContainer( dtoBarCodeString );
+        String dtoBarCodeString = "BarCodeContainerImpl";
+        BarCodeContainerImpl dtoBarCodeContainerImpl = new BarCodeContainerImpl( dtoBarCodeString );
         BigDecimal dtoPrice = new BigDecimal( 10 );
-        ProductDTO productDTO = new ProductDTO( dtoLabel, dtoBarCodeContainer, dtoPrice );
+        ProductDTO productDTO = new ProductDTO( dtoLabel, dtoBarCodeContainerImpl, dtoPrice );
 
 
         //When
@@ -62,7 +61,7 @@ public class ProductConverterImplTest
         Assert.assertNotNull( product );
         Assert.assertThat( product.getId(), is( new Long(0 )) );
         Assert.assertThat( product.getLabel(), is( productDTO.getLabel()));
-        Assert.assertThat( product.getBarCode(), is( productDTO.getBarCodeContainer().getBarCodeObject() ) );
+        Assert.assertThat( product.getBarCode(), is( productDTO.getBarCodeContainerImpl().getBarCodeObject() ) );
         Assert.assertThat( product.getPrice(), is(productDTO.getPrice()) );
     }
 
@@ -100,9 +99,9 @@ public class ProductConverterImplTest
         //Get
         String dtoLabel = "ProductLabel";
         int dtoInvalidBarCode = 123;
-        BarCodeContainer dtoBarCodeContainer = new BarCodeContainer( dtoInvalidBarCode );
+        BarCodeContainerImpl dtoBarCodeContainerImpl = new BarCodeContainerImpl( dtoInvalidBarCode );
         BigDecimal dtoPrice = new BigDecimal( 10 );
-        ProductDTO productDTO = new ProductDTO( dtoLabel, dtoBarCodeContainer, dtoPrice );
+        ProductDTO productDTO = new ProductDTO( dtoLabel, dtoBarCodeContainerImpl, dtoPrice );
 
 
         //When

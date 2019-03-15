@@ -1,7 +1,6 @@
 package com.github.lblaszka.pointofsale.product;
 
-import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
-import javafx.beans.binding.When;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,9 +36,9 @@ public class ProductServiceImplTest
     {
         //GET
         String barCode = new String("BAR-CODE");
-        BarCodeContainer barCodeContainer = new BarCodeContainer( barCode );
+        BarCodeContainerImpl barCodeContainerImpl = new BarCodeContainerImpl( barCode );
         Product product = new Product();
-        ProductDTO productDTO = new ProductDTO( "Product Label", new BarCodeContainer( barCode ), new BigDecimal( 10 ) );
+        ProductDTO productDTO = new ProductDTO( "Product Label", new BarCodeContainerImpl( barCode ), new BigDecimal( 10 ) );
         Optional<Product> productOptional = Optional.of( product );
 
         Mockito.when( productRepository.findByBarCode( barCode ) )
@@ -48,13 +47,13 @@ public class ProductServiceImplTest
         Mockito.when( productConverter.convert( product ) ).thenReturn( productDTO );
 
         //WHEN
-        Optional<ProductDTO> productDTOFromService = productService.findByBarCode( barCodeContainer );
+        Optional<ProductDTO> productDTOFromService = productService.findByBarCode( barCodeContainerImpl );
 
         //THEN
         Assert.assertNotNull( productDTOFromService );
         Assert.assertTrue( productDTOFromService.isPresent() );
         Assert.assertThat( productDTOFromService.get().getLabel(), is( productDTO.getLabel()) );
-        Assert.assertThat( productDTOFromService.get().getBarCodeContainer().getBarCodeObject(), is( productDTO.getBarCodeContainer().getBarCodeObject()) );
+        Assert.assertThat( productDTOFromService.get().getBarCodeContainerImpl().getBarCodeObject(), is( productDTO.getBarCodeContainerImpl().getBarCodeObject()) );
         Assert.assertThat( productDTOFromService.get().getPrice(), is( productDTO.getPrice()) );
     }
 
@@ -63,13 +62,13 @@ public class ProductServiceImplTest
     {
         //GET
         String barCode = new String("NotExistBarCode");
-        BarCodeContainer barCodeContainer = new BarCodeContainer( barCode );
+        BarCodeContainerImpl barCodeContainerImpl = new BarCodeContainerImpl( barCode );
         Optional<Product> productOptional = Optional.empty();
         Mockito.when( productRepository.findByBarCode( barCode ) )
                 .thenReturn( productOptional );
 
         //WHEN
-        Optional<ProductDTO> productDTO = productService.findByBarCode( barCodeContainer );
+        Optional<ProductDTO> productDTO = productService.findByBarCode( barCodeContainerImpl );
 
         //THEN
         Assert.assertNotNull( productDTO );
@@ -81,10 +80,10 @@ public class ProductServiceImplTest
     {
         //GET
         String barCode = new String("NotExistBarCode");
-        BarCodeContainer barCodeContainer = new BarCodeContainer( barCode );
+        BarCodeContainerImpl barCodeContainerImpl = new BarCodeContainerImpl( barCode );
 
         //WHEN
-        Optional<ProductDTO> productDTO = productService.findByBarCode( barCodeContainer );
+        Optional<ProductDTO> productDTO = productService.findByBarCode( barCodeContainerImpl );
 
         //THEN
         Assert.assertNotNull( productDTO );
@@ -107,7 +106,7 @@ public class ProductServiceImplTest
     {
         //GET
         String barCode = new String("BAR-CODE");
-        BarCodeContainer barCodeContainer = new BarCodeContainer( barCode );
+        BarCodeContainerImpl barCodeContainerImpl = new BarCodeContainerImpl( barCode );
         Product product = new Product();
         Optional<Product> productOptional = Optional.of( product );
 
@@ -117,7 +116,7 @@ public class ProductServiceImplTest
         Mockito.when( productConverter.convert( product ) ).thenThrow( ProductConverterException.class );
 
         //WHEN
-        Optional<ProductDTO> productDTO = productService.findByBarCode( barCodeContainer );
+        Optional<ProductDTO> productDTO = productService.findByBarCode( barCodeContainerImpl );
 
         //THEN
         Assert.assertNotNull( productDTO );

@@ -1,8 +1,7 @@
 package com.github.lblaszka.pointofsale.device;
 
-import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 import com.github.lblaszka.pointofsale.displaylcd.DisplayLCD;
-import com.github.lblaszka.pointofsale.displaylcd.DisplayLCDElement;
 import com.github.lblaszka.pointofsale.pricecalculator.PriceCalculator;
 import com.github.lblaszka.pointofsale.pricecalculator.PriceCalculatorImpl;
 import com.github.lblaszka.pointofsale.printer.Printer;
@@ -18,11 +17,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 @RunWith( MockitoJUnitRunner.class )
 public class DeviceImplTestIntegral
@@ -63,13 +59,13 @@ public class DeviceImplTestIntegral
     {
         //GET
         //SCANNER:
-        List<BarCodeContainer> barCodeContainers = new ArrayList<>( 2 );
-        barCodeContainers.add( new BarCodeContainer( "CODE-0" ) );
-        barCodeContainers.add( new BarCodeContainer( "CODE-1" ) );
+        List<BarCodeContainerImpl> barCodeContainerImpls = new ArrayList<>( 2 );
+        barCodeContainerImpls.add( new BarCodeContainerImpl( "CODE-0" ) );
+        barCodeContainerImpls.add( new BarCodeContainerImpl( "CODE-1" ) );
         Mockito.when( scanner.getBarCode() ).thenReturn(
-                Optional.ofNullable( barCodeContainers.get( 0 ) )
-                ,Optional.ofNullable( barCodeContainers.get( 1 ) )
-                ,Optional.ofNullable( new BarCodeContainer( "EXIT" ) )
+                Optional.ofNullable( barCodeContainerImpls.get( 0 ) )
+                ,Optional.ofNullable( barCodeContainerImpls.get( 1 ) )
+                ,Optional.ofNullable( new BarCodeContainerImpl( "EXIT" ) )
         );
 
         //DATA BASE:
@@ -87,13 +83,13 @@ public class DeviceImplTestIntegral
     {
         //GET
         //SCANNER:
-        List<BarCodeContainer> barCodeContainers = new ArrayList<>( 2 );
-        barCodeContainers.add( new BarCodeContainer( "CODE-0" ) );
-        barCodeContainers.add( null );
+        List<BarCodeContainerImpl> barCodeContainerImpls = new ArrayList<>( 2 );
+        barCodeContainerImpls.add( new BarCodeContainerImpl( "CODE-0" ) );
+        barCodeContainerImpls.add( null );
         Mockito.when( scanner.getBarCode() ).thenReturn(
-                Optional.ofNullable( barCodeContainers.get( 0 ) )
-                ,Optional.ofNullable( barCodeContainers.get( 1 ) )
-                ,Optional.ofNullable( new BarCodeContainer( "EXIT" ) )
+                Optional.ofNullable( barCodeContainerImpls.get( 0 ) )
+                ,Optional.ofNullable( barCodeContainerImpls.get( 1 ) )
+                ,Optional.ofNullable( new BarCodeContainerImpl( "EXIT" ) )
         );
 
         //DATA BASE:
@@ -111,13 +107,13 @@ public class DeviceImplTestIntegral
     {
         //GET
         //SCANNER:
-        List<BarCodeContainer> barCodeContainers = new ArrayList<>( 2 );
-        barCodeContainers.add( new BarCodeContainer( "CODE-0" ) );
-        barCodeContainers.add( new BarCodeContainer( "CODE-1" ) );
+        List<BarCodeContainerImpl> barCodeContainerImpls = new ArrayList<>( 2 );
+        barCodeContainerImpls.add( new BarCodeContainerImpl( "CODE-0" ) );
+        barCodeContainerImpls.add( new BarCodeContainerImpl( "CODE-1" ) );
         Mockito.when( scanner.getBarCode() ).thenReturn(
-                Optional.ofNullable( barCodeContainers.get( 0 ) )
-                ,Optional.ofNullable( barCodeContainers.get( 1 ) )
-                ,Optional.ofNullable( new BarCodeContainer( "EXIT" ) )
+                Optional.ofNullable( barCodeContainerImpls.get( 0 ) )
+                ,Optional.ofNullable( barCodeContainerImpls.get( 1 ) )
+                ,Optional.ofNullable( new BarCodeContainerImpl( "EXIT" ) )
         );
 
         //DATA BASE:
@@ -136,7 +132,7 @@ public class DeviceImplTestIntegral
         //GET
         //SCANNER:
         Mockito.when( scanner.getBarCode() ).thenReturn(Optional.ofNullable(
-                new BarCodeContainer( "EXIT" ) )
+                new BarCodeContainerImpl( "EXIT" ) )
         );
 
         device.scanProducts();

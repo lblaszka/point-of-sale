@@ -1,27 +1,8 @@
 package com.github.lblaszka.pointofsale.barcode;
 
-
-import java.util.Objects;
-
-public class BarCodeContainer
+public interface BarCodeContainer
 {
-    private Object barCodeObject;
+    Object getBarCodeObject();
 
-
-    public BarCodeContainer( Object barCodeObject )
-    {
-        this.barCodeObject = barCodeObject;
-    }
-
-
-    public Object getBarCodeObject()
-    {
-        return barCodeObject;
-    }
-
-
-    public void setBarCodeObject( Object barCodeObject )
-    {
-        this.barCodeObject = barCodeObject;
-    }
+    void  setBarCodeObject( Object barCodeObject );
 }

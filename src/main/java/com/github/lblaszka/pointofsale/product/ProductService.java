@@ -1,6 +1,7 @@
 package com.github.lblaszka.pointofsale.product;
 
 import com.github.lblaszka.pointofsale.barcode.BarCodeContainer;
+import com.github.lblaszka.pointofsale.barcode.BarCodeContainerImpl;
 
 import java.util.Optional;
 
