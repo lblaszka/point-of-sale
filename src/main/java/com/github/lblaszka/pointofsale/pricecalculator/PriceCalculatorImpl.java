@@ -18,7 +18,7 @@ public class PriceCalculatorImpl implements PriceCalculator
             if( price == null )
                 continue;
 
-            totalPrice.add( price );
+            totalPrice = totalPrice.add( price );
         }
 
         return totalPrice;
